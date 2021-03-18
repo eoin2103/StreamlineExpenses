@@ -1,0 +1,30 @@
+{
+  "name": "streamlineexpenses",
+  "version": "1.0.0",
+  "description": "Expense Logging app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eoin2103/StreamlineExpenses.git"
+  },
+  "author": "Eoin Gallagher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eoin2103/StreamlineExpenses/issues"
+  },
+  "homepage": "https://github.com/eoin2103/StreamlineExpenses#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
