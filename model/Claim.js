@@ -1,32 +1,36 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const claimSchema = new mongoose.Schema({
 
-    name:{ 
+    title:{ 
         type: String,
         required: true,
         maxLength: 255
     },
-    email:{
+    description:{
         type: String,
         required: true,
         max: 255,
         min: 6
     },
-    password:{
-        type: String,
+    amount:{
+        type: Number,
         required: true,
-        max: 1024,
-        min: 6,
     },
     date: {
         type: Date,
+        required: true,
+        
+    },
+    timestamp: {
+        type: Date,
         default: Date.now
     },
-    usertype: {
-        type: String
+    userID: {
+        type: String,
+        required: true
     }
 
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Claim', claimSchema);
