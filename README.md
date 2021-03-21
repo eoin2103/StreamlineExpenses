@@ -1,4 +1,4 @@
-# StreamlineExpenses
+# StreamlineExpenses 🖩
 
 ## Abstract
 More and more companies are adopting cloud-based solutions to expense management. One of the main reasons for these businesses adopting these solutions is due to the costs involved with regular expense reporting these costs are as a result of the time that is wasted in the process of submitting and approving or investigating a claim. It takes an average of 20 minutes for an expense report to be completed with the average cost of processing that report being USD 58. On average 19% of those submitted reports will contain some kind of error, this leads to a further average of 18 minutes being taken for that report to be corrected which leads to a further cost to the company of an average of USD 52.
