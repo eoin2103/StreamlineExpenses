@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 
 const app = express();
@@ -18,6 +19,7 @@ const claimsroute = require('./routes/claims');
 
 //middleware
 app.use(express.json());
+app.use(cors());
 
 //middleware routes
 app.use('/api/user', authroute);

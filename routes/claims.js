@@ -1,6 +1,17 @@
 const router = require('express').Router();
 const verify = require('./verifyJWT');
 const Claim = require('../model/Claim');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
+
+const filestore = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, )
+    }
+});
 
 
 
@@ -51,7 +62,8 @@ router.get('/addnew', verify, (req,res) => {
     res.send(req.user);
 });
 
-router.post('/addnew', async (req,res) => {
+router.post('/addnew', upload.single('evidence'), async (req,res) => {
+    console.log(req.file);
     const newclaim = new Claim({
         title: req.body.title,
         description: req.body.description,

@@ -22,6 +22,9 @@ const claimSchema = new mongoose.Schema({
         required: true,
         
     },
+    evidence: {
+
+    },
     timestamp: {
         type: Date,
         default: Date.now
