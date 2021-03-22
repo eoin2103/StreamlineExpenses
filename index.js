@@ -2,8 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-
-
 const app = express();
 
 dotenv.config();
@@ -15,11 +13,10 @@ mongoose.connect( process.env.DB_CONNECTION , { useUnifiedTopology: true }, { us
 const authroute = require('./routes/authroute');
 const claimsroute = require('./routes/claims');
 
-
-
 //middleware
 app.use(express.json());
 app.use(cors());
+app.use(express.static('uploads'));
 
 //middleware routes
 app.use('/api/user', authroute);

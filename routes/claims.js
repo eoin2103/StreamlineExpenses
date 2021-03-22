@@ -2,16 +2,18 @@ const router = require('express').Router();
 const verify = require('./verifyJWT');
 const Claim = require('../model/Claim');
 const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
-
-const filestore = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/');
+const fs = require('fs');
+ 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads/')
     },
-    filename: function (req, file, cb) {
-        cb(null, )
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + '.png')
     }
 });
+ 
+const upload = multer({ storage: storage });
 
 
 
@@ -56,19 +58,17 @@ router.patch('/:userId', async (req,res) => {
 });
 
 
-
-
 router.get('/addnew', verify, (req,res) => {
     res.send(req.user);
 });
 
 router.post('/addnew', upload.single('evidence'), async (req,res) => {
-    console.log(req.file);
     const newclaim = new Claim({
         title: req.body.title,
         description: req.body.description,
         amount: req.body.amount,
         date: req.body.date,
+        evidence:`http://localhost:3000/${req.file.filename}` ,
         timestamp: req.body.timestamp,
         userID: req.body.userID
     });
@@ -78,7 +78,7 @@ router.post('/addnew', upload.single('evidence'), async (req,res) => {
     }catch(err){
         res.status(500).send('Internal Server Error');      
     }
-})
+});
 
 router.get('/update', verify, (req,res) => {
     res.send(req.user);

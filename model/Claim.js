@@ -23,7 +23,7 @@ const claimSchema = new mongoose.Schema({
         
     },
     evidence: {
-
+        type: String
     },
     timestamp: {
         type: Date,
