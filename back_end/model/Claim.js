@@ -31,7 +31,6 @@ const claimSchema = new mongoose.Schema({
     },
     userID: {
         type: String,
-        required: true
     }
 
 });
