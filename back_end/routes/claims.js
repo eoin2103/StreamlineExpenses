@@ -76,7 +76,8 @@ router.post('/addnew', upload.single('evidence'), async (req,res) => {
     const nclaim = await newclaim.save();
     res.json(nclaim);
     }catch(err){
-        res.status(500).send('Internal Server Error');      
+        res.status(500).send('Internal Server Error');
+        console.log(err);      
     }
 });
 
