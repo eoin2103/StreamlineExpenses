@@ -36,10 +36,10 @@ router.get('/:userId', async (req,res) => {
 });
 
 //delete claim
-router.delete('/:userId', async (req,res) => {
+router.delete('/:claimId', async (req,res) => {
     try{
-    const claimRemoval = await Claim.remove({_id:req.params.userId});
-    res.json(claimRemoval);
+    const claimRemoval = await Claim.remove({_id:req.params.claimId});
+    res.status(200).json(claimRemoval);
     }catch(err){
         res.json({message:err});
     }
