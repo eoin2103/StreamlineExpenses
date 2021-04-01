@@ -1,62 +1,160 @@
 <template>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center"><i class="fas fa-calculator"></i> Streamline Expenses</h5>
-            <form class="form-signin">
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputEmail">Email address</label>
-              </div>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                <i class="fas fa-calculator"></i> Streamline Expenses
+              </h5>
+              <form class="form-signin">
+                <div class="form-label-group">
+                  <input
+                    type="email"
+                    id="inputEmail"
+                    class="form-control"
+                    placeholder="Email address"
+                    required
+                    autofocus
+                  />
+                  <label for="inputEmail">Email address</label>
+                </div>
 
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" @click="login()">Sign in</button>
-              <hr/>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
-            </form>
+                <div class="form-label-group">
+                  <input
+                    type="password"
+                    id="inputPassword"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                  />
+                  <label for="inputPassword">Password</label>
+                </div>
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  @click="login()"
+                >
+                  Sign in
+                </button>
+                <hr />
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  data-toggle="modal"
+                  data-target="#elegantModalForm"
+                >
+                  Register
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
+      <div
+        class="modal fade"
+        id="elegantModalForm"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <!--Content-->
+          <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="modal-header text-center">
+              <h3
+                class="modal-title w-100 dark-grey-text  my-3"
+                id="myModalLabel"
+              >
+                Register
+              </h3>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mx-4">
+              <!--Body-->
+              <div class="md-form pb-4">
+                <label data-error="wrong" data-success="right" for="Form-name">Full Name</label>
+                <input
+                  type="text"
+                  id="Form-name"
+                  class="form-control validate"
+                />
+                
+              </div>
+              <div class="md-form pb-4">
+                <label data-error="wrong" data-success="right" for="Form-email1">Email</label>
+                <input
+                  type="email"
+                  id="Form-email1"
+                  class="form-control validate"
+                />
+                
+              </div>
+
+              <div class="md-form pb-3">
+                <label data-error="wrong" data-success="right" for="Form-pass1">Password</label>
+                <input
+                  type="password"
+                  id="Form-pass1"
+                  class="form-control validate"
+                />
+                
+              </div>
+
+              <div class="text-center mb-3">
+                <button
+                  type="button"
+                  class="btn btn-block btn-rounded z-depth-1a register"
+                >
+                  Sign up
+                </button>
+              </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer mx-5 pt-3 mb-1"></div>
+          </div>
+          <!--/.Content-->
+        </div>
+      </div>
     </div>
-  </div>
-</body>
-    
+  </body>
 </template>
 
 <script>
 export default {
-    name: 'Login',
-    methods:{
-      login(){
-
-        this.$router.push("/customerHome")
-      }
-    }
-
-}
+  name: "Login",
+  methods: {
+    login() {
+      this.$router.push("/customerHome");
+    },
+  },
+};
 </script>
 
 <style >
-.fas{
+.fas {
   color: black;
 }
 .container {
- background: none;
+  background: none;
 }
 :root {
   --input-padding-x: 1.5rem;
-  --input-padding-y: .75rem;
+  --input-padding-y: 0.75rem;
 }
 
 body {
   background: #007bff;
-  background: linear-gradient(to right, #0062E6, #33AEFF);
+  background: linear-gradient(to right, #0062e6, #33aeff);
 }
 
 .card-signin {
@@ -82,7 +180,7 @@ body {
 .form-signin .btn {
   font-size: 80%;
   border-radius: 5rem;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   font-weight: bold;
   padding: 1rem;
   transition: all 0.2s;
@@ -98,12 +196,12 @@ body {
   border-radius: 2rem;
 }
 
-.form-label-group>input,
-.form-label-group>label {
+.form-label-group > input,
+.form-label-group > label {
   padding: var(--input-padding-y) var(--input-padding-x);
 }
 
-.form-label-group>label {
+.form-label-group > label {
   position: absolute;
   top: 0;
   left: 0;
@@ -114,8 +212,8 @@ body {
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
-  border-radius: .25rem;
-  transition: all .1s ease-in-out;
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in-out;
 }
 
 .form-label-group input::-webkit-input-placeholder {
@@ -143,19 +241,18 @@ body {
   padding-bottom: calc(var(--input-padding-y) / 3);
 }
 
-.form-label-group input:not(:placeholder-shown)~label {
+.form-label-group input:not(:placeholder-shown) ~ label {
   padding-top: calc(var(--input-padding-y) / 3);
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;
   color: #777;
 }
 
-
 /* Fallback for Edge
 -------------------------------------------------- */
 
 @supports (-ms-ime-align: auto) {
-  .form-label-group>label {
+  .form-label-group > label {
     display: none;
   }
   .form-label-group input::-ms-input-placeholder {
@@ -166,9 +263,8 @@ body {
 /* Fallback for IE
 -------------------------------------------------- */
 
-@media all and (-ms-high-contrast: none),
-(-ms-high-contrast: active) {
-  .form-label-group>label {
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .form-label-group > label {
     display: none;
   }
   .form-label-group input:-ms-input-placeholder {
@@ -176,4 +272,9 @@ body {
   }
 }
 
+.register{
+  background: linear-gradient(to right, #0062e6, #33aeff);
+  color: #fff;
+  border-radius: 1rem;
+}
 </style>
