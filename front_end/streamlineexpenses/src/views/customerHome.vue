@@ -8,7 +8,7 @@
       <Claims
         @toggle-status="toggleStatus"
         @claim-delete="deleteClaim"
-        :claims="claims"
+        :claims="employeeClaims"
       />
       <hr class="my-4" />
       <Button
@@ -43,6 +43,7 @@ export default {
     return {
       claims: [],
       showAddClaims: false,
+      show: false,
     };
   },
   methods: {
@@ -52,7 +53,7 @@ export default {
     toggleForm(id, claim) {
       this.showAddClaims = !this.showAddClaims;
     },
-    addClaim(claim) {
+    async addClaim(claim) {
       console.log(claim);
       const fd = new FormData();
       fd.append("title", claim.title);
@@ -60,7 +61,7 @@ export default {
       fd.append("amount", claim.amount);
       fd.append("date", claim.date);
       fd.append("evidence", claim.evidence, claim.evidence.name);
-      axios({
+      await axios({
         method: "post",
         url: "api/claims/addnew",
         data: fd,
@@ -68,8 +69,8 @@ export default {
       });
 
       // const data = JSON.parse(fd);
-      fetchClaims();
       // this.claims = [...this.claims, data];
+      await this.fetchClaims()
     },
     async deleteClaim(id) {
       if (confirm("Are you sure ?")) {
@@ -88,11 +89,9 @@ export default {
       );
     },
     async fetchClaims() {
-      const res = await fetch("api/claims");
+      const res = await fetch("api/claims/all");
 
-      const data = await res.json();
-
-      return data;
+      this.claims = await res.json();
     },
 
     async fetchClaim(id) {
@@ -103,8 +102,13 @@ export default {
       return data;
     },
   },
+  computed: {
+    employeeClaims() {
+      return this.claims;
+    }
+  },
   async created() {
-    this.claims = await this.fetchClaims();
+    await this.fetchClaims();
   },
 };
 </script>

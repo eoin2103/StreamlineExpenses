@@ -25,7 +25,8 @@ router.post('/register', async (req, res) => {
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: encryPass
+        password: encryPass,
+        usertype: "employee"
     });
     try {
         const addUser = await user.save();

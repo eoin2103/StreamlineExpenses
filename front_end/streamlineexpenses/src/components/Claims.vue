@@ -1,6 +1,6 @@
 <template>
-    <div v-for="(claim,index) in claims" :key="claim._id">
-        <Claim @toggle-status = "$emit('toggle-status', claim._id)" @claim-delete = "$emit('claim-delete', claim._id)" :claim="claim" :index="index"/>
+    <div>
+        <Claim v-for="(claim,index) in claims" :key="claim._id" @toggle-status = "$emit('toggle-status', claim._id)" @claim-delete = "$emit('claim-delete', claim._id)" :claim="claim" :index="index"/>
     </div>
 </template>
 

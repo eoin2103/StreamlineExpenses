@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 
 
 
-router.get('/', async (req,res) => {
+router.get('/all', async (req,res) => {
     try{
         const claims = await Claim.find();
         res.json(claims);
@@ -26,9 +26,9 @@ router.get('/', async (req,res) => {
     }
 });
 
-router.get('/:userId', async (req,res) => {
+router.get('/', async (req,res) => {
     try{
-    const uclaim = await Claim.findById(req.params.userId);
+    const uclaim = await Claim.findById(req.user);
     res.json(uclaim);
     }catch(err){
         res.json({message:err});
