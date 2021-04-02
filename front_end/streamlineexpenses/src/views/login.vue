@@ -85,8 +85,9 @@
                 <label data-error="wrong" data-success="right" for="Form-name">Full Name</label>
                 <input
                   type="text"
-                  id="Form-name"
+                  name="name"
                   class="form-control validate"
+                  v-model="name"
                 />
                 
               </div>
@@ -94,8 +95,9 @@
                 <label data-error="wrong" data-success="right" for="Form-email1">Email</label>
                 <input
                   type="email"
-                  id="Form-email1"
+                  name="email"
                   class="form-control validate"
+                  v-model="nemail"
                 />
                 
               </div>
@@ -104,16 +106,18 @@
                 <label data-error="wrong" data-success="right" for="Form-pass1">Password</label>
                 <input
                   type="password"
-                  id="Form-pass1"
+                  name="password"
                   class="form-control validate"
+                  v-model="npassword"
                 />
                 
               </div>
 
               <div class="text-center mb-3">
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-block btn-rounded z-depth-1a register"
+                  @click="addUser"
                 >
                   Sign up
                 </button>
@@ -130,11 +134,43 @@
 </template>
 
 <script>
+/* eslint-disable */
+import axios from "axios";
+
 export default {
   name: "Login",
+  data() {
+    return {
+      name: " ",
+      email: " ",
+      password: " "
+    }
+  },
   methods: {
     login() {
       this.$router.push("/customerHome");
+    },
+    async addUser(e) {
+      e.preventDefault();
+
+      const newUser = {
+        name: this.name,
+        email: this.nemail,
+        password: this.npassword
+      }
+
+      console.log(newUser);
+
+      this.name= "";
+      this.nemail = "";
+      this.npassword = "";
+
+      await axios({
+        method: "post",
+        url: "api/user/register",
+        data: newUser,
+        headers: { "Content-Type": "application/json" },
+      });
     },
   },
 };
@@ -208,7 +244,6 @@ body {
   display: block;
   width: 100%;
   margin-bottom: 0;
-  /* Override default `<label>` margin */
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
@@ -248,9 +283,6 @@ body {
   color: #777;
 }
 
-/* Fallback for Edge
--------------------------------------------------- */
-
 @supports (-ms-ime-align: auto) {
   .form-label-group > label {
     display: none;
@@ -259,9 +291,6 @@ body {
     color: #777;
   }
 }
-
-/* Fallback for IE
--------------------------------------------------- */
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .form-label-group > label {

@@ -10,43 +10,9 @@
       <p><b>Description: </b> {{ claim.description }}</p>
       <p><b>Amount: </b>€{{ claim.amount }}</p>
       <p><b>Date: </b>{{ formatDate(claim.date) }}</p>
-      <div data-toggle="modal" :data-target="`#${claim._id}`">
         <img class="thumbnail" :src="getImgUrl(claim.evidence)" />
         <br />
       </div>
-      <div>
-        <div class="modal fade" :id="claim._id">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">
-                  <b>{{ claim.title }}</b>
-                </h4>
-                <button type="button" class="close" data-dismiss="modal">
-                  &times;
-                </button>
-              </div>
-              <!-- Modal body -->
-              <div class="modal-body">
-                <img class="expanded" :src="getImgUrl(claim.evidence)" />
-              </div>
-
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <br />
   </div>
 </template>
@@ -80,7 +46,6 @@ export default {
 .thumbnail {
   width: 50%;
   border-radius: 1rem;
-  cursor: zoom-in;
   margin-bottom: 10px;
   border: 2px solid rgb(77, 75, 75);
 }
@@ -89,7 +54,7 @@ export default {
   border-radius: 3px;
 }
 .fas {
-  color: red;
+  color: black;
 }
 .claim {
   background: white;
@@ -105,5 +70,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+@media screen and (max-width: 1200px) {
+  .thumbnail {
+    width: 100%;
+  }
 }
 </style>
