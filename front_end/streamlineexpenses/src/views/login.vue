@@ -14,8 +14,8 @@
                     type="email"
                     id="inputEmail"
                     class="form-control"
+                    v-model="email"
                     placeholder="Email address"
-                    required
                     autofocus
                   />
                   <label for="inputEmail">Email address</label>
@@ -27,17 +27,19 @@
                     id="inputPassword"
                     class="form-control"
                     placeholder="Password"
-                    required
+                    v-model="password"
                   />
                   <label for="inputPassword">Password</label>
                 </div>
                 <button
                   class="btn btn-lg btn-primary btn-block text-uppercase"
-                  @click="login()"
+                  @click="login"
                 >
                   Sign in
                 </button>
-                <hr />
+              </form>
+              <hr />
+              <div class="form-signin">
                 <button
                   class="btn btn-lg btn-primary btn-block text-uppercase"
                   data-toggle="modal"
@@ -45,7 +47,7 @@
                 >
                   Register
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -64,7 +66,7 @@
             <!--Header-->
             <div class="modal-header text-center">
               <h3
-                class="modal-title w-100 dark-grey-text  my-3"
+                class="modal-title w-100 dark-grey-text my-3"
                 id="myModalLabel"
               >
                 Register
@@ -82,41 +84,45 @@
             <div class="modal-body mx-4">
               <!--Body-->
               <div class="md-form pb-4">
-                <label data-error="wrong" data-success="right" for="Form-name">Full Name</label>
+                <label data-error="wrong" data-success="right" for="Form-name"
+                  >Full Name</label
+                >
                 <input
                   type="text"
                   name="name"
                   class="form-control validate"
-                  v-model="name"
+                  v-model="nname"
                 />
-                
               </div>
               <div class="md-form pb-4">
-                <label data-error="wrong" data-success="right" for="Form-email1">Email</label>
+                <label data-error="wrong" data-success="right" for="Form-email1"
+                  >Email</label
+                >
                 <input
                   type="email"
                   name="email"
                   class="form-control validate"
                   v-model="nemail"
                 />
-                
               </div>
 
               <div class="md-form pb-3">
-                <label data-error="wrong" data-success="right" for="Form-pass1">Password</label>
+                <label data-error="wrong" data-success="right" for="Form-pass1"
+                  >Password</label
+                >
                 <input
                   type="password"
                   name="password"
                   class="form-control validate"
                   v-model="npassword"
                 />
-                
               </div>
 
               <div class="text-center mb-3">
                 <button
                   type="submit"
                   class="btn btn-block btn-rounded z-depth-1a register"
+                  data-dismiss="modal"
                   @click="addUser"
                 >
                   Sign up
@@ -141,27 +147,51 @@ export default {
   name: "Login",
   data() {
     return {
-      name: " ",
-      email: " ",
-      password: " "
-    }
+      name: "",
+      email: "",
+      password: "",
+    };
   },
   methods: {
-    login() {
+    async login(e) {
+      e.preventDefault();
+
+      const loginAttempt = {
+        email: this.email,
+        password: this.password,
+      };
+      console.log(loginAttempt);
+
+      this.email = "";
+      this.password = "";
+
+      await axios({
+        method: "post",
+        url: "api/user/login",
+        data: loginAttempt,
+        headers: { "Content-Type": "application/json" },
+      }).then((response) => {
+        console.log(response);
+        localStorage.uid = response.data._id;
+        localStorage.username = response.data.name;
+        localStorage.usertype = response.data.usertype;
+        localStorage.token = response.headers["auth-jwt"];
+      });
+
       this.$router.push("/customerHome");
     },
     async addUser(e) {
       e.preventDefault();
 
       const newUser = {
-        name: this.name,
+        name: this.nname,
         email: this.nemail,
-        password: this.npassword
-      }
+        password: this.npassword,
+      };
 
       console.log(newUser);
 
-      this.name= "";
+      this.nname = "";
       this.nemail = "";
       this.npassword = "";
 
@@ -301,7 +331,7 @@ body {
   }
 }
 
-.register{
+.register {
   background: linear-gradient(to right, #0062e6, #33aeff);
   color: #fff;
   border-radius: 1rem;

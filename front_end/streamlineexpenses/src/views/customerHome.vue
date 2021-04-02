@@ -48,9 +48,13 @@ export default {
   },
   methods: {
     logOut() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("usertype");
+      localStorage.removeItem("uid");
       this.$router.push("/login");
     },
-    toggleForm(id, claim) {
+    toggleForm() {
       this.showAddClaims = !this.showAddClaims;
     },
     async addClaim(claim) {
@@ -65,17 +69,22 @@ export default {
         method: "post",
         url: "api/claims/addnew",
         data: fd,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "auth-jwt": localStorage.getItem("token"),
+        },
       });
 
       // const data = JSON.parse(fd);
       // this.claims = [...this.claims, data];
-      await this.fetchClaims()
+      await this.fetchClaims();
     },
     async deleteClaim(id) {
       if (confirm("Are you sure ?")) {
-        const res = await fetch(`api/claims/${id}`, {
+        const res = await axios({
           method: "delete",
+          url: `api/claims/${id}`,
+          headers: { "auth-jwt": localStorage.getItem("token") },
         });
 
         res.status === 200
@@ -89,23 +98,30 @@ export default {
       );
     },
     async fetchClaims() {
-      const res = await fetch("api/claims/all");
-
-      this.claims = await res.json();
+      await axios({
+        method: "get",
+        url: "api/claims/all",
+        headers: { "auth-jwt": localStorage.getItem("token") },
+      }).then((response) => {
+        this.claims = response.data;
+      });
     },
 
     async fetchClaim(id) {
-      const res = await fetch(`api/claims/${id}`);
-
-      const data = await res.json();
-
-      return data;
+      await axios({
+        method: "get",
+        url: `api/claims/${id}`,
+        headers: { "auth-jwt": localStorage.getItem("token") },
+      }).then((response) => {
+        const data = response.data;
+        return data;
+      });
     },
   },
   computed: {
     employeeClaims() {
       return this.claims;
-    }
+    },
   },
   async created() {
     await this.fetchClaims();
