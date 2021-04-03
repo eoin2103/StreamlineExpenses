@@ -61,6 +61,7 @@ export default {
       date: " ",
       evidence: null,
       userID: " ",
+      status: " ",
     };
   },
   methods: {
@@ -82,6 +83,8 @@ export default {
         return;
       }
 
+      const status = "unapproved"
+
       const newClaim = {
         title: this.title,
         description: this.description,
@@ -89,6 +92,7 @@ export default {
         date: this.date,
         evidence: this.file,
         userID: localStorage.getItem("uid"),
+        status: status
       };
 
       this.$emit("add-claim", newClaim);

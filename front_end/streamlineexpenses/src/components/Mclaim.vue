@@ -13,6 +13,8 @@
       <p><b>Status: </b>{{claim.status}}</p>
         <img class="thumbnail" :src="getImgUrl(claim.evidence)" />
         <br />
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Deny</button>
       </div>
     <br />
   </div>
@@ -20,7 +22,7 @@
 
 <script>
 export default {
-  name: "Claim",
+  name: "Mclaim",
   props: {
     claim: Object,
     index: Number,

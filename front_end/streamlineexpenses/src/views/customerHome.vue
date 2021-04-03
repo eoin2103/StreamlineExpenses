@@ -66,6 +66,7 @@ export default {
       fd.append("date", claim.date);
       fd.append("evidence", claim.evidence, claim.evidence.name);
       fd.append("userID", claim.userID);
+      fd.append("status", claim.status);
       await axios({
         method: "post",
         url: "api/claims/addnew",

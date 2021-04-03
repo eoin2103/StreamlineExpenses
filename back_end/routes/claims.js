@@ -70,7 +70,8 @@ router.post('/addnew', verify, upload.single('evidence'), async (req,res) => {
         date: req.body.date,
         evidence:`http://localhost:3000/${req.file.filename}` ,
         timestamp: req.body.timestamp,
-        userID: req.body.userID
+        userID: req.body.userID,
+        status: req.body.status,
     });
     try{
     const nclaim = await newclaim.save();

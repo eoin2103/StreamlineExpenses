@@ -142,6 +142,7 @@
 <script>
 /* eslint-disable */
 import axios from "axios";
+import store from "../store/store";
 
 export default {
   name: "Login",
@@ -178,7 +179,15 @@ export default {
         localStorage.token = response.headers["auth-jwt"];
       });
 
-      this.$router.push("/customerHome");
+      await this.logincheck();
+    },
+    logincheck() {
+      if (localStorage.usertype != null) {
+        store.commit("setAuthentication", true);
+        this.$router.push("/customerHome");
+      } else {
+        console.log("Not logged in please try again");
+      }
     },
     async addUser(e) {
       e.preventDefault();
