@@ -182,9 +182,21 @@ export default {
       await this.logincheck();
     },
     logincheck() {
-      if (localStorage.usertype != null) {
+      if (localStorage.token != null && localStorage.usertype == "employee") {
         store.commit("setAuthentication", true);
         this.$router.push("/customerHome");
+      } else if (
+        localStorage.token != null &&
+        localStorage.usertype == "manager"
+      ) {
+        store.commit("setAuthentication", true);
+        this.$router.push("/manager");
+      } else if (
+        localStorage.token != null &&
+        localStorage.usertype == "admin"
+      ) {
+        store.commit("setAuthentication", true);
+        this.$router.push("/admin");
       } else {
         console.log("Not logged in please try again");
       }

@@ -5,17 +5,16 @@
       <!--@dblclick="$emit('toggle-status')"-->
       <h3>
         {{ claim.title }}
-        <i @click="$emit('claim-delete')" class="fas fa-times"></i>
       </h3>
       <p><b>Description: </b> {{ claim.description }}</p>
       <p><b>Amount: </b>€{{ claim.amount }}</p>
       <p><b>Date: </b>{{ formatDate(claim.date) }}</p>
-      <p><b>Status: </b>{{claim.status}}</p>
-        <img class="thumbnail" :src="getImgUrl(claim.evidence)" />
-        <br />
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Deny</button>
-      </div>
+      <p><b>Status: </b>{{ claim.status }}</p>
+      <img class="thumbnail" :src="getImgUrl(claim.evidence)" />
+      <br />
+      <button class="btn btn-success" @click="$emit('approve')">Approve</button>
+      <button class="btn btn-danger" @click="$emit('deny')">Deny</button>
+    </div>
     <br />
   </div>
 </template>

@@ -1,24 +1,27 @@
 <template>
-    <div>
-        <Claim v-for="(claim,index) in claims" :key="claim._id" @toggle-status = "$emit('toggle-status', claim._id)" @claim-delete = "$emit('claim-delete', claim._id)" :claim="claim" :index="index"/>
-    </div>
+  <div>
+    <Claim
+      v-for="(claim, index) in claims"
+      :key="claim._id"
+      @toggle-status="$emit('toggle-status', claim._id)"
+      @claim-delete="$emit('claim-delete', claim._id)"
+      :claim="claim"
+      :index="index"
+    />
+  </div>
 </template>
 
 <script>
-import Claim from './Claim'
+import Claim from "./Claim";
 
 export default {
-    name: 'Claims',
-    props: {
-        claims: Array,   
-    },
-    components: {
-        Claim
-    },
-    emits: [
-        'claim-delete',
-        'toggle-status'
-    ]
-
-}
+  name: "Claims",
+  props: {
+    claims: Array,
+  },
+  components: {
+    Claim,
+  },
+  emits: ["claim-delete", "toggle-status"],
+};
 </script>

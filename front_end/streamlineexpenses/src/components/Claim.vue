@@ -10,10 +10,10 @@
       <p><b>Description: </b> {{ claim.description }}</p>
       <p><b>Amount: </b>€{{ claim.amount }}</p>
       <p><b>Date: </b>{{ formatDate(claim.date) }}</p>
-      <p><b>Status: </b>{{claim.status}}</p>
-        <img class="thumbnail" :src="getImgUrl(claim.evidence)" />
-        <br />
-      </div>
+      <p><b>Status: </b>{{ claim.status }}</p>
+      <img class="thumbnail" :src="getImgUrl(claim.evidence)" />
+      <br />
+    </div>
     <br />
   </div>
 </template>

@@ -4,7 +4,7 @@ import customerHome from "../views/customerHome";
 import login from "../views/login";
 import AdminHome from "../views/AdminHome";
 import ManagerHome from "../views/ManagerHome";
-import store from "../store/store"
+import store from "../store/store";
 
 const routes = [
   {
@@ -14,6 +14,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (store.state.authenticated == false) {
         next(false);
+        router.push("/login");
       } else {
         next();
       }
@@ -32,25 +33,27 @@ const routes = [
     path: "/admin",
     name: "admin",
     component: AdminHome,
-    // beforeEnter: (to, from, next) => {
-    //   if(store.state.authenticated == false) {
-    //     next(false)
-    //   }else{
-    //     next();
-    //   }
-    // }
+    beforeEnter: (to, from, next) => {
+      if (store.state.authenticated == false) {
+        next(false);
+        router.push("/login");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/manager",
     name: "manager",
     component: ManagerHome,
-    // beforeEnter: (to, from, next) => {
-    //   if(store.state.authenticated == false) {
-    //     next(false)
-    //   }else{
-    //     next();
-    //   }
-    // }
+    beforeEnter: (to, from, next) => {
+      if (store.state.authenticated == false) {
+        next(false);
+        router.push("/login");
+      } else {
+        next();
+      }
+    },
   },
 ];
 

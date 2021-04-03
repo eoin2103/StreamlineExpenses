@@ -94,13 +94,8 @@ export default {
           : alert("Error Claim delete failed");
       }
     },
-    toggleStatus(id) {
-      this.claims = this.claims.map((claim) =>
-        claim._id === id ? { ...claim, status: !claim.status } : claim
-      );
-    },
     async fetchClaims() {
-      const uid = await localStorage.getItem("uid")
+      const uid = await localStorage.getItem("uid");
       await axios({
         method: "get",
         url: `api/claims/${uid}`,

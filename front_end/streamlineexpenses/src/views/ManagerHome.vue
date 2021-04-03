@@ -5,7 +5,7 @@
       <Header title=" Streamline Expenses" />
       <hr class="my-4" />
       <h2>Submitted Claims:</h2>
-      <Mclaims :claims="employeeClaims" />
+      <Mclaims :claims="claims" @approve="approve" @deny="deny" />
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 /* eslint-disable */
 import Header from "../components/Header";
 import Mclaims from "../components/Mclaims";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "managerHome",
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       claims: [],
+      status: "",
     };
   },
   methods: {
@@ -45,14 +46,46 @@ export default {
         this.claims = response.data;
       });
     },
-  },
-  computed: {
-    employeeClaims () {
-      return this.fetchClaims();
-    }
+    async approve(id) {
+
+      const claimstatus = {
+        status: "approved",
+      };
+
+      await axios({
+        method: "patch",
+        url: `api/claims/${id}`,
+        data: claimstatus,
+        headers: {
+          "Content-Type": "application/json",
+          "auth-jwt": localStorage.getItem("token"),
+        },
+      });
+
+      await this.fetchClaims();
+    },
+    async deny(id) {
+    
+      const claimstatus = {
+        status: "denied",
+      };
+
+      await axios({
+        method: "patch",
+        url: `api/claims/${id}`,
+        data: claimstatus,
+        headers: {
+          "Content-Type": "application/json",
+          "auth-jwt": localStorage.getItem("token"),
+        },
+      });
+
+      await this.fetchClaims();
+    },
   },
   async created() {
     await this.fetchClaims();
+    
   },
 };
 </script>
@@ -104,6 +137,29 @@ h1 {
 @media only screen and (min-width: 280px) and (max-height: 653px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
   h1 {
     font-size: 6.5vw;
+  }
+}
+.logout {
+  top: 0;
+  right: 0;
+  position: fixed;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: 10px 10px 0 40px;
+  -webkit-box-shadow: 11px 18px 65px 6px rgba(0, 0, 0, 0.64);
+  -moz-box-shadow: 11px 18px 65px 6px rgba(0, 0, 0, 0.64);
+  box-shadow: 11px 18px 65px 6px rgba(0, 0, 0, 0.64);
+}
+.logout:hover {
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+}
+@media screen and (max-width: 1200px) {
+  .logout {
+    background-color: #000;
+    color: #fff;
   }
 }
 </style>
