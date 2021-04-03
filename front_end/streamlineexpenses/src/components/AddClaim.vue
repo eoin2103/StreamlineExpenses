@@ -60,6 +60,7 @@ export default {
       amount: " ",
       date: " ",
       evidence: null,
+      userID: " ",
     };
   },
   methods: {
@@ -87,6 +88,7 @@ export default {
         amount: this.amount,
         date: this.date,
         evidence: this.file,
+        userID: localStorage.getItem("uid"),
       };
 
       this.$emit("add-claim", newClaim);

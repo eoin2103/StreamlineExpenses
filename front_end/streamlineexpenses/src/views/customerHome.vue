@@ -65,6 +65,7 @@ export default {
       fd.append("amount", claim.amount);
       fd.append("date", claim.date);
       fd.append("evidence", claim.evidence, claim.evidence.name);
+      fd.append("userID", claim.userID);
       await axios({
         method: "post",
         url: "api/claims/addnew",
@@ -98,11 +99,13 @@ export default {
       );
     },
     async fetchClaims() {
+      const uid = await localStorage.getItem("uid")
       await axios({
         method: "get",
-        url: "api/claims/all",
+        url: `api/claims/${uid}`,
         headers: { "auth-jwt": localStorage.getItem("token") },
       }).then((response) => {
+        console.log(response);
         this.claims = response.data;
       });
     },

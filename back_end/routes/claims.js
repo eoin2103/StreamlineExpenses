@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 
 
 
-router.get('/all', async (req,res) => {
+router.get('/all', verify, async (req,res) => {
     try{
         const claims = await Claim.find();
         res.json(claims);
@@ -26,9 +26,9 @@ router.get('/all', async (req,res) => {
     }
 });
 
-router.get('/', async (req,res) => {
+router.get('/:userID', verify, async (req,res) => {
     try{
-    const uclaim = await Claim.findById(req.user);
+    const uclaim = await Claim.find({userID: req.params.userID});
     res.json(uclaim);
     }catch(err){
         res.json({message:err});
@@ -36,7 +36,7 @@ router.get('/', async (req,res) => {
 });
 
 //delete claim
-router.delete('/:claimId', async (req,res) => {
+router.delete('/:claimId', verify, async (req,res) => {
     try{
     const claimRemoval = await Claim.remove({_id:req.params.claimId});
     res.status(200).json(claimRemoval);
@@ -46,7 +46,7 @@ router.delete('/:claimId', async (req,res) => {
 });
 
 //update a claim
-router.patch('/:userId', async (req,res) => {
+router.patch('/:userId', verify, async (req,res) => {
     try{
         const claimUpdate = await Claim.updateOne({_id:req.params.userId}, 
             {$set: {title:req.body.title}}
@@ -62,7 +62,7 @@ router.get('/addnew', verify, (req,res) => {
     res.send(req.user);
 });
 
-router.post('/addnew', upload.single('evidence'), async (req,res) => {
+router.post('/addnew', verify, upload.single('evidence'), async (req,res) => {
     const newclaim = new Claim({
         title: req.body.title,
         description: req.body.description,
