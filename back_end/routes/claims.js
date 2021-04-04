@@ -63,7 +63,7 @@ router.post("/addnew", verify, upload.single("evidence"), async (req, res) => {
     description: req.body.description,
     amount: req.body.amount,
     date: req.body.date,
-    evidence: `http://localhost:3000/${req.file.filename}`,
+    evidence: `http://streamlineexpenses.tech:3000/${req.file.filename}`,
     timestamp: req.body.timestamp,
     userID: req.body.userID,
     status: req.body.status,

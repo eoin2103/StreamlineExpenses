@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
   const jtoken = jwt.sign({ _id: user._id }, process.env.JTOKEN_SECRET, {
     expiresIn: 86400,
   });
-  res.header("auth-jwt", jtoken).send(user);
+  res.json({...user, jwt: jtoken});
 });
 
 router.get("/", verify, async (req, res) => {

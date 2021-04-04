@@ -39,7 +39,7 @@ export default {
     async fetchClaims() {
       await axios({
         method: "get",
-        url: `api/claims/all`,
+        url: `http://streamlineexpenses.tech:3000/api/claims/all`,
         headers: { "auth-jwt": localStorage.getItem("token") },
       }).then((response) => {
         console.log(response);
@@ -54,7 +54,7 @@ export default {
 
       await axios({
         method: "patch",
-        url: `api/claims/${id}`,
+        url: `http://streamlineexpenses.tech:3000/api/claims/${id}`,
         data: claimstatus,
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export default {
 
       await axios({
         method: "patch",
-        url: `api/claims/${id}`,
+        url: `http://streamlineexpenses.tech:3000/api/claims/${id}`,
         data: claimstatus,
         headers: {
           "Content-Type": "application/json",

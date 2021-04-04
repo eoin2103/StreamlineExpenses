@@ -168,15 +168,15 @@ export default {
 
       await axios({
         method: "post",
-        url: "api/user/login",
+        url: "http://streamlineexpenses.tech:3000/api/user/login",
         data: loginAttempt,
         headers: { "Content-Type": "application/json" },
       }).then((response) => {
         console.log(response);
-        localStorage.uid = response.data._id;
-        localStorage.username = response.data.name;
-        localStorage.usertype = response.data.usertype;
-        localStorage.token = response.headers["auth-jwt"];
+        localStorage.uid = response.data._doc._id;
+        localStorage.username = response.data._doc.name;
+        localStorage.usertype = response.data._doc.usertype;
+        localStorage.token = response.data.jwt;
       });
 
       await this.logincheck();
@@ -218,7 +218,7 @@ export default {
 
       await axios({
         method: "post",
-        url: "api/user/register",
+        url: "http://streamlineexpenses.tech:3000/api/user/register",
         data: newUser,
         headers: { "Content-Type": "application/json" },
       });

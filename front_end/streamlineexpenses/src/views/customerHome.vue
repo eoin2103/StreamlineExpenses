@@ -69,7 +69,7 @@ export default {
       fd.append("status", claim.status);
       await axios({
         method: "post",
-        url: "api/claims/addnew",
+        url: "http://streamlineexpenses.tech:3000/api/claims/addnew",
         data: fd,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -85,7 +85,7 @@ export default {
       if (confirm("Are you sure ?")) {
         const res = await axios({
           method: "delete",
-          url: `api/claims/${id}`,
+          url: `http://streamlineexpenses.tech:3000/api/claims/${id}`,
           headers: { "auth-jwt": localStorage.getItem("token") },
         });
 
@@ -98,7 +98,7 @@ export default {
       const uid = await localStorage.getItem("uid");
       await axios({
         method: "get",
-        url: `api/claims/${uid}`,
+        url: `http://streamlineexpenses.tech:3000/api/claims/${uid}`,
         headers: { "auth-jwt": localStorage.getItem("token") },
       }).then((response) => {
         console.log(response);
@@ -109,7 +109,7 @@ export default {
     async fetchClaim(id) {
       await axios({
         method: "get",
-        url: `api/claims/${id}`,
+        url: `http://streamlineexpenses.tech:3000/api/claims/${id}`,
         headers: { "auth-jwt": localStorage.getItem("token") },
       }).then((response) => {
         const data = response.data;

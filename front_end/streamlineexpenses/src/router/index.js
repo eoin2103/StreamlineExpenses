@@ -14,7 +14,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (store.state.authenticated == false) {
         next(false);
-        router.push("/login");
+        this.$router.push("/login");
       } else {
         next();
       }
@@ -35,8 +35,8 @@ const routes = [
     component: AdminHome,
     beforeEnter: (to, from, next) => {
       if (store.state.authenticated == false) {
+        this.$router.push("/login");
         next(false);
-        router.push("/login");
       } else {
         next();
       }
@@ -48,8 +48,8 @@ const routes = [
     component: ManagerHome,
     beforeEnter: (to, from, next) => {
       if (store.state.authenticated == false) {
+        this.$router.push("/login");
         next(false);
-        router.push("/login");
       } else {
         next();
       }

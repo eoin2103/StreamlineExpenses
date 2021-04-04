@@ -48,7 +48,7 @@ export default {
     async fetchClaims() {
       await axios({
         method: "get",
-        url: `api/user/`,
+        url: `http://streamlineexpenses.tech:3000/api/user/`,
         headers: { "auth-jwt": localStorage.getItem("token") },
       }).then((response) => {
         console.log(response);
@@ -59,7 +59,7 @@ export default {
       if (confirm("Are you sure ?")) {
         const res = await axios({
           method: "delete",
-          url: `api/user/${id}`,
+          url: `http://streamlineexpenses.tech:3000/api/user/${id}`,
           headers: { "auth-jwt": localStorage.getItem("token") },
         });
         
