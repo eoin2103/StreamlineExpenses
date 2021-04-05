@@ -142,7 +142,6 @@
 <script>
 /* eslint-disable */
 import axios from "axios";
-import store from "../store/store";
 
 export default {
   name: "Login",
@@ -183,19 +182,16 @@ export default {
     },
     logincheck() {
       if (localStorage.token != null && localStorage.usertype == "employee") {
-        store.commit("setAuthentication", true);
         this.$router.push("/customerHome");
       } else if (
         localStorage.token != null &&
         localStorage.usertype == "manager"
       ) {
-        store.commit("setAuthentication", true);
         this.$router.push("/manager");
       } else if (
         localStorage.token != null &&
         localStorage.usertype == "admin"
       ) {
-        store.commit("setAuthentication", true);
         this.$router.push("/admin");
       } else {
         console.log("Not logged in please try again");

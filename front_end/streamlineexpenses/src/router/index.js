@@ -4,7 +4,6 @@ import customerHome from "../views/customerHome";
 import login from "../views/login";
 import AdminHome from "../views/AdminHome";
 import ManagerHome from "../views/ManagerHome";
-import store from "../store/store";
 
 const routes = [
   {
@@ -12,9 +11,8 @@ const routes = [
     name: "customerHome",
     component: customerHome,
     beforeEnter: (to, from, next) => {
-      if (store.state.authenticated == false) {
-        next(false);
-        this.$router.push("/login");
+      if (localStorage.token == null) {
+        next({name: "login"});
       } else {
         next();
       }
@@ -34,9 +32,8 @@ const routes = [
     name: "admin",
     component: AdminHome,
     beforeEnter: (to, from, next) => {
-      if (store.state.authenticated == false) {
-        this.$router.push("/login");
-        next(false);
+      if (localStorage.token == null) {
+        next({name: "login"});
       } else {
         next();
       }
@@ -47,9 +44,8 @@ const routes = [
     name: "manager",
     component: ManagerHome,
     beforeEnter: (to, from, next) => {
-      if (store.state.authenticated == false) {
-        this.$router.push("/login");
-        next(false);
+      if (localStorage.token == null) {
+        next({name: "login"});
       } else {
         next();
       }
